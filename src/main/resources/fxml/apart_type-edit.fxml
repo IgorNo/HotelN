@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import jfxtras.labs.scene.control.*?>
+<?import jfxtras.labs.scene.control.window.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="565.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nov.hotel.gui.controllers.impl.ApartTypeEditController">
+   <left>
+      <VBox prefHeight="245.0" prefWidth="114.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="107.0" text="%table.column.room.type">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="15.0" layoutY="138.0" prefHeight="31.0" prefWidth="109.0" text="%table.column.size">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="113.0" text="%table.column.price1">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="15.0" layoutY="56.0" prefHeight="31.0" prefWidth="112.0" text="%table.column.price2">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="123.0" text="%label.additional.slots" />
+            <Label alignment="BOTTOM_RIGHT" layoutX="15.0" layoutY="97.0" prefHeight="31.0" prefWidth="113.0" text="%table.column.price3">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label alignment="BOTTOM_RIGHT" layoutX="15.0" layoutY="210.0" prefHeight="31.0" prefWidth="113.0" text="%label.description" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" top="5.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <center>
+      <VBox minWidth="200.0" prefHeight="82.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="txtName" prefHeight="30.0" prefWidth="190.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="txtSizing" layoutX="15.0" layoutY="135.0" prefHeight="30.0" prefWidth="190.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="txtPrice1" prefHeight="30.0" prefWidth="190.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="txtPrice2" layoutX="15.0" layoutY="56.0" prefHeight="30.0" prefWidth="190.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="txtnAdditionalSlot" prefHeight="30.0" prefWidth="65.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="txtPrice3" layoutX="15.0" layoutY="97.0" prefHeight="30.0" prefWidth="190.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextArea fx:id="txtarDescription" prefHeight="175.0" prefWidth="331.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextArea>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <right>
+      <VBox prefHeight="245.0" prefWidth="85.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnOk" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#actionSave" prefHeight="25.0" prefWidth="80.0" text="%menu.title.save">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnCancel" cancelButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#actionClose" prefHeight="25.0" prefWidth="80.0" text="%button.cancel">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+      </VBox>
+   </right>
+</BorderPane>

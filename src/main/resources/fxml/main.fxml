@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="600.0" prefWidth="900.0" styleClass="main-panel" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nov.hotel.gui.controllers.MainController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="%menu.title.file">
+          <items>
+            <MenuItem mnemonicParsing="false" text="%menu.title.new" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.open" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.close" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.save" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.save.as" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+                  <Menu mnemonicParsing="false" text="%menu.title.language">
+                    <items>
+                        <RadioMenuItem mnemonicParsing="false" text="English" />
+                        <RadioMenuItem mnemonicParsing="false" text="Українька" />
+                        <RadioMenuItem mnemonicParsing="false" text="Русский" />
+                    </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" text="%menu.title.print" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.preferences" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" onAction="#actionClose" text="%menu.title.exit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="%menu.title.edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="%menu.title.undo" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.cut" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.copy" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.paste" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.select.all" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.unselect.all" />
+          </items>
+        </Menu>
+            <Menu mnemonicParsing="false" text="%menu.title.hotel">
+              <items>
+                <MenuItem fx:id="menuSettling" mnemonicParsing="false" onAction="#hotelSettling" text="%menu.item.settling" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="%menu.title.clients">
+              <items>
+                <MenuItem fx:id="menuAllClients" mnemonicParsing="false" onAction="#clientAll" text="%menu.item.client.all" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="%menu.title.thesauri">
+              <items>
+                  <MenuItem fx:id="menuAppartments" mnemonicParsing="false" onAction="#editAppartments" text="%menu.item.appartments" />
+                <MenuItem fx:id="menuPriceList" mnemonicParsing="false" onAction="#editPriceList" text="%menu.item.apartment.type" />
+                  <MenuItem fx:id="menuAppartmentStatus1" mnemonicParsing="false" onAction="#editBlocks" text="%menu.item.blocks" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="menuServices" mnemonicParsing="false" onAction="#editServices" text="%menu.item.services" />
+                  <MenuItem fx:id="menuAppartmentStatus" mnemonicParsing="false" onAction="#editAppartmentStatus" text="%menu.item.apartment.status" />
+              </items>
+            </Menu>
+        <Menu mnemonicParsing="false" text="%menu.title.help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="%menu.title.about" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+      <HBox prefHeight="87.0" prefWidth="900.0" />
+      <AnchorPane prefHeight="553.0" prefWidth="900.0" />
+    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+      <children>
+        <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" HBox.hgrow="ALWAYS">
+          <font>
+            <Font size="11.0" fx:id="x3" />
+          </font>
+          <textFill>
+            <Color blue="0.625" green="0.625" red="0.625" fx:id="x4" />
+          </textFill>
+        </Label>
+        <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
+        <Label font="$x3" maxWidth="-1.0" textFill="$x4" HBox.hgrow="NEVER" />
+      </children>
+      <padding>
+        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+      </padding>
+    </HBox>
+  </children>
+</VBox>

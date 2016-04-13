@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import jfxtras.scene.control.*?>
+<?import org.controlsfx.glyphfont.*?>
+<?import jfxtras.labs.scene.control.grid.cell.*?>
+<?import jfxtras.labs.scene.control.*?>
+<?import jfxtras.labs.scene.control.window.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox prefHeight="291.0" prefWidth="517.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nov.hotel.gui.controllers.impl.ClientEditController">
+   <children>
+      <TabPane prefHeight="266.0" prefWidth="455.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="%tab.pane.client">
+               <content>
+                  <HBox prefHeight="337.0" prefWidth="377.0">
+                     <children>
+                        <VBox prefHeight="337.0" prefWidth="125.0">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="133.0" text="%label.surname">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="133.0" text="%label.name">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" layoutX="15.0" layoutY="56.0" prefHeight="31.0" prefWidth="133.0" text="%label.patronymic">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="31.0" prefWidth="133.0" text="%label.birthday">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="15.0" layoutY="138.0" prefHeight="31.0" prefWidth="133.0" text="%label.citizenship" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="337.0" prefWidth="307.0">
+                           <children>
+                              <TextField fx:id="txtSurname" prefHeight="30.0" prefWidth="208.0">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="txtName" prefHeight="30.0" prefWidth="194.0">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="txtPatronymic" layoutX="15.0" layoutY="55.0" prefHeight="30.0" prefWidth="194.0">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <VBox minWidth="200.0" prefHeight="43.0" prefWidth="200.0">
+                                 <children>
+                                    <HBox>
+                                       <children>
+                                          <DatePicker fx:id="dateBirthday" prefHeight="30.0" prefWidth="117.0">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </DatePicker>
+                                          <Label alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="55.0" text="%table.column.client.sex">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <ToolBar fx:id="toolbarSex" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="106.0">
+                                             <items>
+                                                <RadioButton fx:id="rbtnMan" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="%radio.button.man">
+                                                   <HBox.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </HBox.margin>
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="tgSex" />
+                                                   </toggleGroup>
+                                                </RadioButton>
+                                                <RadioButton fx:id="rbtnWoman" mnemonicParsing="false" prefHeight="30.0" prefWidth="41.0" text="%radio.button.woman" toggleGroup="$tgSex" />
+                                             </items>
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </HBox.margin>
+                                          </ToolBar>
+                                       </children>
+                                    </HBox>
+                                    <HBox>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <HBox layoutX="10.0" layoutY="173.0">
+                                 <children>
+                                    <ComboBox fx:id="comboCitizenship" layoutX="15.0" layoutY="55.0" prefHeight="30.0" prefWidth="299.0">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </VBox.margin>
+                                    </ComboBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </content>
+            </Tab>
+          <Tab text="%tab.pane.passport">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="237.0" prefWidth="125.0">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="96.0" text="%label.doc.type">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" layoutX="15.0" layoutY="15.0" prefHeight="30.0" prefWidth="96.0" text="%label.doc.series">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" layoutX="15.0" layoutY="55.0" prefHeight="30.0" prefWidth="96.0" text="%label.doc.number">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="90.0" prefHeight="30.0" prefWidth="96.0" text="%label.doc.date">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="120.0" prefHeight="30.0" prefWidth="96.0" text="%label.doc.issue">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="237.0" prefWidth="328.0">
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <ComboBox fx:id="comboDocType" layoutX="15.0" layoutY="55.0" prefHeight="30.0" prefWidth="303.0">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </VBox.margin>
+                                    </ComboBox>
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="txtDocSeries" prefHeight="30.0" prefWidth="208.0">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="txtDocNumber" layoutX="15.0" layoutY="55.0" prefHeight="30.0" prefWidth="208.0">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <DatePicker fx:id="dateDocDate" prefHeight="30.0" prefWidth="303.0">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </DatePicker>
+                              <TextArea fx:id="txtDocIssue" prefHeight="90.0" prefWidth="310.0">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextArea>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </content>
+            </Tab>
+            <Tab text="%tab.pane.place.residence">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="125.0">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="133.0" text="%table.column.client.country">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" layoutX="15.0" layoutY="15.0" prefHeight="31.0" prefWidth="133.0" text="%label.region">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="51.0" prefHeight="31.0" prefWidth="133.0" text="%label.address">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="237.0" prefWidth="297.0">
+                           <children>
+                              <HBox maxHeight="30.0" minHeight="30.0" prefHeight="30.0">
+                                 <children>
+                                    <ComboBox fx:id="comboCountry" layoutX="15.0" layoutY="55.0" prefHeight="30.0" prefWidth="305.0">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </VBox.margin>
+                                    </ComboBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0">
+                                 <children>
+                                    <ComboBox fx:id="comboRegion" layoutX="15.0" layoutY="55.0" prefHeight="30.0" prefWidth="243.0">
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </VBox.margin>
+                                    </ComboBox>
+                                    <Button fx:id="btnRegion" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <TextArea fx:id="txtAddress" prefHeight="90.0" prefWidth="295.0">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextArea>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </content>
+            </Tab>
+            <Tab text="%tab.pane.client.type">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="257.0" prefWidth="140.0">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="30.0" prefWidth="125.0" text="%label.client.type">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="15.0" layoutY="15.0" prefHeight="30.0" prefWidth="124.0" text="%label.client.discount">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="237.0" prefWidth="297.0">
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <ComboBox fx:id="comboType" layoutX="15.0" layoutY="55.0" prefHeight="30.0" prefWidth="341.0">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </VBox.margin>
+                                    </ComboBox>
+                                 </children>
+                              </HBox>
+                              <TextField fx:id="txtDiscount" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <VBox prefHeight="266.0" prefWidth="128.0">
+         <children>
+            <Button fx:id="btnOk" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#actionSave" prefHeight="25.0" prefWidth="80.0" text="%menu.title.save">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnCancel" cancelButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#actionClose" prefHeight="25.0" prefWidth="80.0" text="%button.cancel">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</HBox>
