@@ -5,11 +5,12 @@ import com.nov.hotel.entities.interfaces.Entity;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Client implements Entity<Long, Client>, Customer, Comparable<Client> {
 
     private long id;
-    private ObjectProperty<LocalDate> regDate = new SimpleObjectProperty<>();
+    private ObjectProperty<LocalDateTime> regDate = new SimpleObjectProperty<>();
 
     private StringProperty name = new SimpleStringProperty("");
     private StringProperty surname = new SimpleStringProperty("");
@@ -33,7 +34,7 @@ public class Client implements Entity<Long, Client>, Customer, Comparable<Client
 
 
     public Client() {
-        regDate.set(LocalDate.now());
+        regDate.set(LocalDateTime.now().now());
         setDiscount(1.0f);
         setSex(true);
     }
@@ -102,15 +103,15 @@ public class Client implements Entity<Long, Client>, Customer, Comparable<Client
         this.id = id;
     }
 
-    public LocalDate getRegDate() {
+    public LocalDateTime getRegDate() {
         return regDate.get();
     }
 
-    public void setRegDate(LocalDate regDate) {
+    public void setRegDate(LocalDateTime regDate) {
         this.regDate.set(regDate);
     }
 
-    public ObjectProperty<LocalDate> regDateProperty() {
+    public ObjectProperty<LocalDateTime> regDateProperty() {
         return regDate;
     }
 

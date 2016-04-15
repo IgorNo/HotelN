@@ -13,7 +13,7 @@ public interface CrudDao<K, V> {
     V getRow(K id);
 
     //Read
-    <S extends Comparable> List<V> getSelected(S sample);
+    <S> List<V> getSelected(S sample);
 
     //Read All
     List<V> getAll();

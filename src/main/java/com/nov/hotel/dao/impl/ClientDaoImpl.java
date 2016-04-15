@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Repository("clientDao")
@@ -52,7 +53,7 @@ public class ClientDaoImpl extends CrudDaoAbstractLong<Client>{
 
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("id",elem.getId());
-        params.addValue("regDate",Date.valueOf(elem.getRegDate()));
+        params.addValue("regDate", Timestamp.valueOf(elem.getRegDate()));
         params.addValue("surname", elem.getSurname());
         params.addValue("name", elem.getName());
         params.addValue("patronimic", elem.getPatronymic());
@@ -105,7 +106,7 @@ public class ClientDaoImpl extends CrudDaoAbstractLong<Client>{
 
             Client client = new Client();
             client.setId(rs.getLong("client_id_n"));
-            client.setRegDate(rs.getDate("client_regdate_d").toLocalDate());
+            client.setRegDate(rs.getTimestamp("client_regdate_d").toLocalDateTime());
 
             client.setSurname(rs.getString("client_surname_s"));
             client.setName(rs.getString("client_name_s"));

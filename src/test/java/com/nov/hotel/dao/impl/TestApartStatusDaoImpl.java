@@ -32,12 +32,16 @@ public class TestApartStatusDaoImpl {
 
     @BeforeClass
     public static void setUpBeforClass(){
+        elem1.setId("F");
         elem1.setName("номер");
         elem1.setColor("1");
+        elem2.setId("R");
         elem2.setName("Бронь");
         elem2.setColor("0xffff4dff");
+        elem3.setId("B");
         elem3.setName("Зайнятий");
         elem3.setColor("0x4d66ccff");
+        elem4.setId("O");
         elem4.setName("Ремонт");
         elem4.setColor("0xff6666ff");
         testData.add(elem1);
@@ -86,21 +90,14 @@ public class TestApartStatusDaoImpl {
     public void testGetAll(){
         result.clear();
         result = dao.getAll();
-        for (int i = 0; i < testData.size(); i++) {
-            ApartStatus testType = testData.get(i);
-            ApartStatus resultType = result.get(i);
-            assertEquals(testType.getName(),resultType.getName());
-            assertEquals(testType.getColor(),resultType.getColor());
-        }
+        assertEquals(testData.size(), result.size());
         LOG.warn("\ngetAll Data:\n"+result.toString());
     }
 
     @Test
     public void testUpdate(){
-        result.clear();
-        result = dao.getAll();
-        ApartStatus apartType = new ApartStatus();
-        apartType.setId(result.get(0).getId());
+        ApartStatus apartType = testData.get(0);
+        apartType.setId(testData.get(0).getId());
         apartType.setName("Вільний номер");
         apartType.setColor("0xccffffff");
         dao.update(apartType);
@@ -112,7 +109,6 @@ public class TestApartStatusDaoImpl {
         LOG.warn("\nUpdate Data:\n"+ apartType.toString());
         result = dao.getAll();
         LOG.warn("\nAfter Update:\n"+result.toString());
-
     }
 
     @Test

@@ -3,12 +3,13 @@ package com.nov.hotel.collections.impl;
 import com.nov.hotel.collections.abstr.ObserCollecReposAbstract;
 import com.nov.hotel.dao.impl.AllocationDaoImpl;
 import com.nov.hotel.dao.interfaces.CrudDao;
+import com.nov.hotel.entities.Allocation;
 
 import static com.nov.hotel.main.Start.APPLICATION_CONTEXT;
 
-public class AllocationCollection extends ObserCollecReposAbstract {
+public class AllocationCollection extends ObserCollecReposAbstract<Long, Allocation> {
 
-    private AllocationDaoImpl dao = (AllocationDaoImpl) APPLICATION_CONTEXT.getBean("apartmentDao");
+    private AllocationDaoImpl dao = (AllocationDaoImpl) APPLICATION_CONTEXT.getBean("allocationDao");
 
     private static AllocationCollection uniqueObsColl;
 

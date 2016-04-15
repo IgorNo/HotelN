@@ -55,7 +55,7 @@ public abstract class CrudDaoAbstract<K, V> implements CrudDao<K,V>{
     }
 
     @Override
-    public <S extends Comparable> List<V> getSelected(S sample) {
+    public <S> List<V> getSelected(S sample) {
         String sql = sqlSelectSome + " = :sample";
 
         MapSqlParameterSource params = new MapSqlParameterSource();

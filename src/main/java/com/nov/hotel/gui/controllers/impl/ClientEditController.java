@@ -45,10 +45,10 @@ public class ClientEditController extends AbstractEditDialogController<Long, Cli
     public TextField txtDiscount;
 
 
-    ObservableCollection<Country> countries;// = CountryCollection.getInstance().readAllData();
-    ObservableCollection<DocumType> docTypes ;//= DocumTypeCollection.getInstance().readAllData();
-    ObservableCollection<Region> regionsAll;// = RegionCollection.getInstance().readAllData();
-    ObservableCollection<ClientType> types; // = ClientTypeCollection.getInstance().readAllData();
+    ObservableCollection<Country> countries = CountryCollection.getInstance().readAllData();
+    ObservableCollection<DocumType> docTypes = DocumTypeCollection.getInstance().readAllData();
+    ObservableCollection<Region> regionsAll = RegionCollection.getInstance().readAllData();
+    ObservableCollection<ClientType> types = ClientTypeCollection.getInstance().readAllData();
 
     ObservableList<Region> regionsCountry;
 

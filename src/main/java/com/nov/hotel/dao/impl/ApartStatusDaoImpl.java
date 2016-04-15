@@ -1,6 +1,7 @@
 package com.nov.hotel.dao.impl;
 
 import com.nov.hotel.collections.impl.ApartStatusCollection;
+import com.nov.hotel.dao.abstr.CrudDaoAbstrObject;
 import com.nov.hotel.dao.abstr.CrudDaoAbstractInt;
 import com.nov.hotel.dao.interfaces.CrudDao;
 import com.nov.hotel.entities.ApartStatus;
@@ -18,16 +19,16 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository("apartStatusDao")
-public class ApartStatusDaoImpl extends CrudDaoAbstractInt<ApartStatus> {
+public class ApartStatusDaoImpl extends CrudDaoAbstrObject<String, ApartStatus> {
 
     {
         nameDataBase = "apart_status";
-        sqlInsert = "INSERT INTO apart_status (app_stat_name_s, app_stat_color_s) " +
-                "VALUES (:name, :color)";
+        sqlInsert = "INSERT INTO apart_status (app_stat_id_s, app_stat_name_s, app_stat_color_s) " +
+                "VALUES (:id, :name, :color)";
         sqlUpdate = "UPDATE apart_status SET app_stat_name_s= :name, app_stat_color_s= :color " +
-                "WHERE app_stat_id_n = :id";
-        sqlDelete = "DELETE FROM apart_status WHERE block_id_n = :id";
-        sqlSelectSingle = "SELECT * FROM apart_status WHERE app_stat_id_n";
+                "WHERE app_stat_id_s = :id";
+        sqlDelete = "DELETE FROM apart_status WHERE app_stat_id_s = :id";
+        sqlSelectSingle = "SELECT * FROM apart_status WHERE app_stat_id_s";
         sqlSelectSome = "SELECT * FROM apart_status WHERE app_stat_name_s";
         sqlSelectAll = "SELECT * FROM apart_status";
     }
@@ -45,7 +46,7 @@ public class ApartStatusDaoImpl extends CrudDaoAbstractInt<ApartStatus> {
         @Override
         public ApartStatus mapRow(ResultSet rs, int rowNum) throws SQLException {
             ApartStatus apartStatus = new ApartStatus();
-            apartStatus.setId(rs.getInt("app_stat_id_n"));
+            apartStatus.setId(rs.getString("app_stat_id_s"));
             apartStatus.setName(rs.getString("app_stat_name_s"));
             apartStatus.setColor(rs.getString("app_stat_color_s"));
             return ApartStatusCollection.getInstance().putValue(apartStatus);
@@ -54,7 +55,7 @@ public class ApartStatusDaoImpl extends CrudDaoAbstractInt<ApartStatus> {
 
     @Override
     protected RowMapper<ApartStatus> getRowMapper() {
-        return null;
+        return rowMapper;
     }
 
     @Override

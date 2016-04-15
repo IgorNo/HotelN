@@ -6,7 +6,7 @@ import com.nov.hotel.dao.interfaces.CrudDao;
 import com.nov.hotel.entities.ApartStatus;
 import com.nov.hotel.main.Start;
 
-public class ApartStatusCollection extends ObserCollecReposAbstract<Integer, ApartStatus> {
+public class ApartStatusCollection extends ObserCollecReposAbstract<String, ApartStatus> {
 
     private ApartStatusDaoImpl dao = (ApartStatusDaoImpl) Start.APPLICATION_CONTEXT.getBean("apartStatusDao");
 

@@ -1,8 +1,12 @@
 package com.nov.hotel.entities;
 
+import com.nov.hotel.collections.impl.AllocClientCollection;
+import com.nov.hotel.collections.impl.AllocationCollection;
+import com.nov.hotel.collections.interfaces.ObservableCollection;
 import com.nov.hotel.entities.interfaces.Customer;
 import com.nov.hotel.entities.interfaces.Entity;
 import javafx.beans.property.*;
+import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,13 +14,17 @@ import java.time.LocalDateTime;
 public class Invoice implements Entity<Long, Invoice>, Comparable<Invoice> {
 
     private Long id = new Long(0);
-    private ObjectProperty<LocalDateTime> createTime = new SimpleObjectProperty<>();
+    private LocalDateTime createTime = LocalDateTime.now();
     private StringProperty invoiceN = new SimpleStringProperty();
     private ObjectProperty<LocalDate> invoiceDate = new SimpleObjectProperty<>();
     private FloatProperty amount = new SimpleFloatProperty();
     private ObjectProperty<Customer> customer = new SimpleObjectProperty<>();
     private ObjectProperty<User> user = new SimpleObjectProperty<>();
+    private ObservableList<Allocation> allocations = new SimpleListProperty<>();
 
+    public Invoice() {
+        setInvoiceDate(LocalDate.now());
+    }
 
     @Override
     public void assign(Invoice elem) {
@@ -44,15 +52,11 @@ public class Invoice implements Entity<Long, Invoice>, Comparable<Invoice> {
     }
 
     public LocalDateTime getCreateTime() {
-        return createTime.get();
-    }
-
-    public ObjectProperty<LocalDateTime> createTimeProperty() {
         return createTime;
     }
 
     public void setCreateTime(LocalDateTime createTime) {
-        this.createTime.set(createTime);
+        this.createTime = createTime;
     }
 
     public String getInvoiceN() {
@@ -113,6 +117,14 @@ public class Invoice implements Entity<Long, Invoice>, Comparable<Invoice> {
 
     public void setUser(User user) {
         this.user.set(user);
+    }
+
+    public ObservableList<Allocation> getAllocations() {
+        return allocations;
+    }
+
+    public void setAllocations(ObservableList<Allocation> allocations) {
+        this.allocations = allocations;
     }
 
     @Override

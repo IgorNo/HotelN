@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Repository("allocClientsDao")
 public class AllocClientsDaoImpl extends CrudDaoAbstrObject<Object, AllocClient> {
@@ -55,7 +56,6 @@ public class AllocClientsDaoImpl extends CrudDaoAbstrObject<Object, AllocClient>
         throw new UnsupportedOperationException("getRow");
     }
 
-
     private static final RowMapper<AllocClient> rowMapper = new RowMapper<AllocClient>() {
         @Override
         public AllocClient mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -89,7 +89,7 @@ public class AllocClientsDaoImpl extends CrudDaoAbstrObject<Object, AllocClient>
 
             Client client = new Client();
             client.setId(rs.getLong("client_id_n"));
-            client.setRegDate(rs.getDate("client_regdate_d").toLocalDate());
+            client.setRegDate(rs.getTimestamp("client_regdate_d").toLocalDateTime());
 
             client.setSurname(rs.getString("client_surname_s"));
             client.setName(rs.getString("client_name_s"));
