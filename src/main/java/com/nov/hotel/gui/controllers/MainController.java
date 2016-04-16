@@ -1,7 +1,7 @@
 package com.nov.hotel.gui.controllers;
 
 
-import com.nov.hotel.collections.impl.BlockCollection;
+import com.nov.hotel.collections.impl.*;
 import com.nov.hotel.entities.Block;
 import com.nov.hotel.gui.controllers.abstr.AbstractController;
 import com.nov.hotel.gui.controllers.abstr.AbstractTableController;
@@ -30,12 +30,14 @@ public class MainController extends AbstractController {
     public void editPriceList(ActionEvent actionEvent) {
         priceListWindow = ApartTypeWindow.getInstance();
         priceListWindow.initOwner(MainWindow.getInstance().getStage());
+        ApartTypeCollection.getInstance().readAllData();
         priceListWindow.showAndWait();
     }
 
     public void editAppartments(ActionEvent actionEvent) {
         apartmentsWindow = ApartmentsWindow.getInstance();
         apartmentsWindow.initOwner(MainWindow.getInstance().getStage());
+        ApartmentCollection.getInstance().readAllData();
         apartmentsWindow.showAndWait();
     }
 
@@ -48,6 +50,7 @@ public class MainController extends AbstractController {
     public void editAppartmentStatus(ActionEvent actionEvent) {
         apartStatusWindow = ApartStatusWindow.getInstance();
         apartStatusWindow.initOwner(MainWindow.getInstance().getStage());
+        ApartStatusCollection.getInstance().readAllData();
         apartStatusWindow.showAndWait();
     }
 
@@ -58,13 +61,15 @@ public class MainController extends AbstractController {
         blocksWindow.showAndWait();
     }
 
+     public void clientAll(ActionEvent actionEvent) {
+        clientWindow = ClientsWindow.getInstance();
+        clientWindow.initOwner(MainWindow.getInstance().getStage());
+        ClientCollection.getInstance().readAllData();
+        clientWindow.showAndWait();
+    }
+
     public void actionClose(ActionEvent actionEvent) {
         System.exit(0);
     }
 
-    public void clientAll(ActionEvent actionEvent) {
-        clientWindow = ClientsWindow.getInstance();
-        clientWindow.initOwner(MainWindow.getInstance().getStage());
-        clientWindow.showAndWait();
-    }
 }

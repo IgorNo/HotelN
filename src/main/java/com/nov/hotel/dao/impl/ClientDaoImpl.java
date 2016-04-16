@@ -32,13 +32,13 @@ public class ClientDaoImpl extends CrudDaoAbstractLong<Client>{
     {
           nameDataBase = "clients";
 
-          sqlInsert = "INSERT INTO clients (client_regdate_d, client_surname_s, client_name_s, client_patronymic_s, " +
+          sqlInsert = "INSERT INTO clients (client_regdate_dt, client_surname_s, client_name_s, client_patronymic_s, " +
                 "client_sex_b, client_birthday_d, client_citizen_fk, client_doctype_fk, client_docser_s, client_docnum_s, client_docdate_d, client_docissue_s, " +
                 "client_region_fk, client_address_s, client_type_fk, client_discount_n) " +
                 "VALUES (:regDate, :surname, :name, :patronimic, :sex, :birthday, :citizenship, " +
                 ":docType, :docSeries, :docNumber, :docDate, :docIssue, :regionAddress, :address, :type, :discount)";
 
-          sqlUpdate = "UPDATE clients SET client_regdate_d= :regDate, client_surname_s= :surname, client_name_s= :name, client_patronymic_s= :patronimic, " +
+          sqlUpdate = "UPDATE clients SET client_regdate_dt= :regDate, client_surname_s= :surname, client_name_s= :name, client_patronymic_s= :patronimic, " +
                 "client_sex_b= :sex, client_birthday_d= :birthday, client_citizen_fk=  :citizenship, client_doctype_fk= :docType, " +
                 "client_docser_s= :docSeries, client_docnum_s= :docNumber, client_docdate_d= :docDate, client_docissue_s= :docIssue, " +
                 "client_region_fk= :regionAddress, client_address_s= :address, client_type_fk= :type, client_discount_n= :discount " +
@@ -106,7 +106,7 @@ public class ClientDaoImpl extends CrudDaoAbstractLong<Client>{
 
             Client client = new Client();
             client.setId(rs.getLong("client_id_n"));
-            client.setRegDate(rs.getTimestamp("client_regdate_d").toLocalDateTime());
+            client.setRegDate(rs.getTimestamp("client_regdate_dt").toLocalDateTime());
 
             client.setSurname(rs.getString("client_surname_s"));
             client.setName(rs.getString("client_name_s"));

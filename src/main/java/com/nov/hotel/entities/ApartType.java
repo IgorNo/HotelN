@@ -5,7 +5,7 @@ import javafx.beans.property.*;
 
 public class ApartType implements Entity<Integer, ApartType>, Comparable<ApartType> {
 
-    private Integer id;
+    private Integer id = new Integer(0);
     private StringProperty name = new SimpleStringProperty();
     private IntegerProperty size = new SimpleIntegerProperty();
     private FloatProperty priceDay = new SimpleFloatProperty();
