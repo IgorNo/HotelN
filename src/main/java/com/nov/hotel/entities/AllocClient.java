@@ -1,9 +1,10 @@
 package com.nov.hotel.entities;
 
+import com.nov.hotel.entities.interfaces.Entity;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-public class AllocClient {
+public class AllocClient{
 
     private long idAlloc;
     private Client client;

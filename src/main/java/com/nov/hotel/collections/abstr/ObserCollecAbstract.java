@@ -64,7 +64,7 @@ public abstract class ObserCollecAbstract<V> implements ObservableCollection<V>{
     @Override
     public <S> ObservableCollection readSelectedData(S sample) {
         GetSeveralTransaction<Object,V,S> t = new GetSeveralTransaction<>(getDao(), sample);
-        viewList.clear();
+//        viewList.clear();
         viewList.addAll(t.execute().getResult());
         return this;
     }

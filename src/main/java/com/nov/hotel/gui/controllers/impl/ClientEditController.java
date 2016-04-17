@@ -26,8 +26,7 @@ public class ClientEditController extends AbstractEditDialogController<Long, Cli
     public RadioButton rbtnWoman;
     
     public ComboBox comboCitizenship;
-    public Button btnCitizenship;
-    
+
     public ComboBox comboDocType;
     public TextField txtDocSeries;
     public TextField txtDocNumber;
@@ -41,7 +40,6 @@ public class ClientEditController extends AbstractEditDialogController<Long, Cli
     public TextArea txtAddress;
     
     public ComboBox comboType;
-    public Button btnType;
     public TextField txtDiscount;
 
 
