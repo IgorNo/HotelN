@@ -25,7 +25,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import jfxtras.scene.control.ListView;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 import org.controlsfx.validation.decoration.StyleClassValidationDecoration;
@@ -56,9 +55,9 @@ public class InvoiceAddController extends AbstractController implements Initiali
     public RadioButton rbtIndivid;
     public RadioButton rbtnOffice;
     public TextField txtCustomer;
-    
+
     public ListView listvRoom;
-    
+
     public Tab tabAccomodation;
 
     public DatePicker datepStart;
@@ -85,7 +84,7 @@ public class InvoiceAddController extends AbstractController implements Initiali
     public RadioButton rbtMan;
     public RadioButton rbtnWoman;
     public RadioButton rbtnMixed;
-    
+
     public ChoiceBox comboSelectedRoom;
 
     public TextField txtPriceDay;
@@ -113,7 +112,6 @@ public class InvoiceAddController extends AbstractController implements Initiali
         this.resourceBundle = resources;
         validationSupport.setValidationDecorator(new StyleClassValidationDecoration());
         fillField();
-//        showAllocation(null);
         initListeners();
     }
 
@@ -190,7 +188,7 @@ public class InvoiceAddController extends AbstractController implements Initiali
     }
 
     public void deleteRoom(ActionEvent actionEvent) {
-        invoice.getAllocations().remove(listvRoom.getSelectedItem());
+        invoice.getAllocations().remove(listvRoom.getSelectionModel().getSelectedItem());
     }
 
     public void selectBlock(ActionEvent actionEvent) {

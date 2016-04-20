@@ -1,35 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.layout.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1010.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nov.hotel.gui.controllers.impl.InvoiceAddController">
+<VBox prefHeight="619.0" prefWidth="1006.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nov.hotel.gui.controllers.impl.InvoiceAddController">
    <children>
-      <AnchorPane prefHeight="33.0" prefWidth="932.0" style="-fx-border-color: lightblue; -fx-border-width: 2; -fx-border-radius: 8;">
-         <children>
-            <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="120.0" text="%label.owner.invoice" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <ToolBar maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="285.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="5.0">
-               <items>
-                  <RadioButton fx:id="rbtIndivid" mnemonicParsing="false" prefHeight="30.0" prefWidth="128.0" text="%radio.button.individual">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="tgCustomer" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton fx:id="rbtnOffice" mnemonicParsing="false" prefHeight="30.0" prefWidth="141.0" text="%radio.button.office" toggleGroup="$tgCustomer" />
-               </items>
-            </ToolBar>
-            <TextField fx:id="txtCustomer" editable="false" layoutX="553.0" layoutY="5.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="313.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="420.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="5.0" />
-            <Button fx:id="btnCustomer" mnemonicParsing="false" onAction="#selectCustomer" prefHeight="30.0" prefWidth="30.0" text="Button" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
-         </children>
-      </AnchorPane>
       <AnchorPane prefHeight="30.0" prefWidth="932.0" style="-fx-border-color: lightblue; -fx-border-width: 2; -fx-border-radius: 8;">
          <children>
             <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="35.0" prefWidth="95.0" text="%label.invoice" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
@@ -50,8 +27,35 @@
             <DatePicker fx:id="datepInvoice" layoutX="809.0" layoutY="8.0" prefHeight="30.0" prefWidth="125.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
             <TextField fx:id="txtInvoiceNumber" layoutX="102.0" layoutY="8.0" prefHeight="30.0" prefWidth="60.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="5.0" />
          </children>
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </VBox.margin>
       </AnchorPane>
-      <AnchorPane prefHeight="517.0" prefWidth="1003.0">
+      <AnchorPane prefHeight="33.0" prefWidth="932.0" style="-fx-border-color: lightblue; -fx-border-width: 2; -fx-border-radius: 8;">
+         <children>
+            <Label alignment="CENTER_RIGHT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="120.0" text="%label.owner.invoice" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <ToolBar maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="285.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="5.0">
+              <items>
+                  <RadioButton fx:id="rbtIndivid" mnemonicParsing="false" prefHeight="30.0" prefWidth="128.0" text="%radio.button.individual">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="tgCustomer" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="rbtnOffice" mnemonicParsing="false" prefHeight="30.0" prefWidth="141.0" text="%radio.button.office" toggleGroup="$tgCustomer" />
+              </items>
+            </ToolBar>
+            <TextField fx:id="txtCustomer" editable="false" layoutX="553.0" layoutY="5.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="313.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="420.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="5.0" />
+            <Button fx:id="btnCustomer" mnemonicParsing="false" onAction="#selectCustomer" prefHeight="30.0" prefWidth="30.0" text="Button" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" />
+         </VBox.margin>
+      </AnchorPane>
+      <AnchorPane prefHeight="517.0" prefWidth="1003.0" VBox.vgrow="ALWAYS">
          <children>
             <AnchorPane fx:id="anchorpSelRoom" disable="true" layoutX="5.0" layoutY="5.0" prefHeight="395.0" prefWidth="160.0" style="-fx-border-color: lightblue; -fx-border-width: 2; -fx-border-radius: 8;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
                <children>
@@ -63,7 +67,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <ListView fx:id="listvRoom" prefHeight="447.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="35.0" />
+                  <ListView fx:id="listvRoom" layoutY="20.0" prefHeight="330.0" prefWidth="187.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="25.0" />
                   <HBox prefHeight="30.0" prefWidth="137.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0">
                      <children>
                         <Button fx:id="btnAddRoom" mnemonicParsing="false" onAction="#addRoom" text="+">
@@ -81,8 +85,8 @@
                </children>
             </AnchorPane>
             <TabPane layoutX="180.0" layoutY="10.0" prefHeight="426.0" prefWidth="731.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="115.0" AnchorPane.topAnchor="5.0">
-               <tabs>
-                  <Tab fx:id="tabAccomodation" disable="true" text="%tab.pane.accommodation">
+              <tabs>
+                <Tab fx:id="tabAccomodation" disable="true" text="%tab.pane.accommodation">
                      <content>
                         <AnchorPane>
                            <children>
@@ -239,8 +243,7 @@
                                           <RadioButton fx:id="rbtMan" mnemonicParsing="false" text="%radio.button.man">
                                              <toggleGroup>
                                                 <ToggleGroup fx:id="tgComposition" />
-                                             </toggleGroup>
-                                          </RadioButton>
+                                             </toggleGroup></RadioButton>
                                           <RadioButton fx:id="rbtnWoman" layoutX="10.0" layoutY="12.0" mnemonicParsing="false" text="%radio.button.woman" toggleGroup="$tgComposition">
                                              <padding>
                                                 <Insets left="5.0" />
@@ -287,7 +290,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab fx:id="tabRegistration" disable="true" text="%tab.pane.registration">
+                <Tab fx:id="tabRegistration" disable="true" text="%tab.pane.registration">
                      <content>
                         <AnchorPane prefHeight="455.0" prefWidth="619.0">
                            <children>
@@ -333,7 +336,7 @@
                   <Tab fx:id="tabServices" disable="true" text="%tab.pane.services" />
                   <Tab fx:id="tabInvoice" disable="true" text="%tab.pane.invoice" />
                   <Tab fx:id="tabPayments" disable="true" text="%tab.pane.payments" />
-               </tabs>
+              </tabs>
             </TabPane>
             <VBox id="DSADD" prefHeight="266.0" prefWidth="105.0" style="-fx-border-color: LIGHTBLUE; -fx-border-width: 2; -fx-border-radius: 8;" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                <children>

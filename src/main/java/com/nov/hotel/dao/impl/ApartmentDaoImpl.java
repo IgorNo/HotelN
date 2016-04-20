@@ -48,12 +48,12 @@ public class ApartmentDaoImpl extends CrudDaoAbstractLong<Apartment> {
 
     public List<Apartment> getSelectedRoom(RoomQuery query){
         String sql = "SELECT * FROM apartments_view WHERE ";
-        if (query.getType() != null) sql += "apart_type_fk = :type ";
-        if (query.getBlock() != null) sql += "apart_block_fk = :block ";
+        if (query.getType() != null) sql += "apart_type_fk = :type AND";
+        if (query.getBlock() != null) sql += "apart_block_fk = :block AND";
         if (query.getLevel() != null){
-            sql += "apart_level_number_n " + query.getCompOper().getStrOper() + " :level ";
+//            sql += "apart_level_number_n " + query.getCompOper().getStrOper() + " :level AND";
         }
-        sql += "AND NOT apart_id_n IN ( " + sqlOccupiedRoom + ") ";
+        sql += "NOT apart_id_n IN ( " + sqlOccupiedRoom + ") ";
 
         return jdbcTemplate.query(sql, getQueryParams(query), getRowMapper());
     }
