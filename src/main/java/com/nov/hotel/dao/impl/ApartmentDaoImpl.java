@@ -7,6 +7,7 @@ import com.nov.hotel.dao.abstr.CrudDaoAbstractLong;
 import com.nov.hotel.entities.ApartType;
 import com.nov.hotel.entities.Apartment;
 import com.nov.hotel.entities.Block;
+import com.nov.hotel.entities.RoomQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.List;
 
 @Repository("apartmentDao")
 public class ApartmentDaoImpl extends CrudDaoAbstractLong<Apartment> {
@@ -22,6 +25,8 @@ public class ApartmentDaoImpl extends CrudDaoAbstractLong<Apartment> {
     BlockDaoImpl blockDao;
     @Autowired
     ApartTypeDaoImpl apartTypeDao;
+
+    private String sqlOccupiedRoom;
 
     {
           nameDataBase = "apartments";
@@ -34,7 +39,37 @@ public class ApartmentDaoImpl extends CrudDaoAbstractLong<Apartment> {
           sqlSelectSingle = "SELECT * FROM apartments_view WHERE apart_id_n";
           sqlSelectSome = "SELECT * FROM apartments_view WHERE apart_room_number_s";
           sqlSelectAll = "SELECT * FROM apartments_view";
+
+        sqlOccupiedRoom = "SELECT DISTINCT invd_apart_id_fk FROM inv_rooms " +
+                "WHERE invd_apart_status_fk != 'F' AND (invd_start_date_dt < :endDate OR invd_end_date_dt > :startDate) " +
+                " ";
+
     }
+
+    public List<Apartment> getSelectedRoom(RoomQuery query){
+        String sql = "SELECT * FROM apartments_view WHERE ";
+        if (query.getType() != null) sql += "apart_type_fk = :type ";
+        if (query.getBlock() != null) sql += "apart_block_fk = :block ";
+        if (query.getLevel() != null){
+            sql += "apart_level_number_n " + query.getCompOper().getStrOper() + " :level ";
+        }
+        sql += "AND NOT apart_id_n IN ( " + sqlOccupiedRoom + ") ";
+
+        return jdbcTemplate.query(sql, getQueryParams(query), getRowMapper());
+    }
+
+    protected MapSqlParameterSource getQueryParams(RoomQuery elem) {
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("block", elem.getBlock().getId());
+        params.addValue("level", elem.getLevel());
+        params.addValue("type", elem.getType().getId());
+        params.addValue("startDate", Timestamp.valueOf(elem.getDtStart()));
+        params.addValue("endDate", Timestamp.valueOf(elem.getDtEnd()));
+        params.addValue("mBeds", elem.getmBedsN());
+        params.addValue("eBeds", elem.geteBedN());
+        return params;
+    }
+
 
     protected MapSqlParameterSource getParams(Apartment elem) {
         MapSqlParameterSource params = new MapSqlParameterSource();

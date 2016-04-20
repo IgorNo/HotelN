@@ -12,7 +12,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="619.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nov.hotel.gui.controllers.impl.InvoiceEditController">
+<VBox prefHeight="619.0" prefWidth="1006.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nov.hotel.gui.controllers.impl.InvoiceAddController">
    <children>
       <AnchorPane prefHeight="30.0" prefWidth="932.0" style="-fx-border-color: lightblue; -fx-border-width: 2; -fx-border-radius: 8;">
          <children>
@@ -31,7 +31,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <DatePicker fx:id="da" layoutX="809.0" layoutY="8.0" prefHeight="30.0" prefWidth="125.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+            <DatePicker fx:id="datepInvoice" layoutX="809.0" layoutY="8.0" prefHeight="30.0" prefWidth="125.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
             <TextField fx:id="txtInvoiceNumber" layoutX="102.0" layoutY="8.0" prefHeight="30.0" prefWidth="60.0" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="5.0" />
          </children>
          <VBox.margin>
@@ -55,16 +55,16 @@
                   <RadioButton fx:id="rbtnOffice" mnemonicParsing="false" prefHeight="30.0" prefWidth="141.0" text="%radio.button.office" toggleGroup="$tgCustomer" />
               </items>
             </ToolBar>
-            <TextField fx:id="txtCustomer" layoutX="553.0" layoutY="5.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="313.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="420.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="5.0" />
+            <TextField fx:id="txtCustomer" editable="false" layoutX="553.0" layoutY="5.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="313.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="420.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="5.0" />
             <Button fx:id="btnCustomer" mnemonicParsing="false" onAction="#selectCustomer" prefHeight="30.0" prefWidth="30.0" text="Button" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
          </children>
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" />
          </VBox.margin>
       </AnchorPane>
-      <AnchorPane prefHeight="400.0" prefWidth="950.0" VBox.vgrow="ALWAYS">
+      <AnchorPane prefHeight="517.0" prefWidth="1003.0" VBox.vgrow="ALWAYS">
          <children>
-            <AnchorPane layoutX="5.0" layoutY="5.0" prefHeight="395.0" prefWidth="160.0" style="-fx-border-color: lightblue; -fx-border-width: 2; -fx-border-radius: 8;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+            <AnchorPane fx:id="anchorpSelRoom" disable="true" layoutX="5.0" layoutY="5.0" prefHeight="395.0" prefWidth="160.0" style="-fx-border-color: lightblue; -fx-border-width: 2; -fx-border-radius: 8;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
                <children>
                   <Label alignment="BOTTOM_LEFT" prefHeight="20.0" prefWidth="133.0" text="%label.selected.rooms" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <font>
@@ -93,13 +93,13 @@
             </AnchorPane>
             <TabPane layoutX="180.0" layoutY="10.0" prefHeight="426.0" prefWidth="731.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="115.0" AnchorPane.topAnchor="5.0">
               <tabs>
-                <Tab fx:id="tabAccomodation" text="%tab.pane.accommodation">
+                <Tab fx:id="tabAccomodation" disable="true" text="%tab.pane.accommodation">
                      <content>
                         <AnchorPane>
                            <children>
                               <AnchorPane layoutX="6.0" layoutY="5.0" prefHeight="80.0" prefWidth="335.0" style="-fx-border-color: lightblue; -fx-border-width: 2; -fx-border-radius: 8;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
                                  <children>
-                                    <HBox layoutX="8.0" layoutY="8.0" prefHeight="76.0" prefWidth="329.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <HBox layoutX="4.0" layoutY="4.0" prefHeight="76.0" prefWidth="350.0" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="2.0">
                                        <children>
                                           <VBox prefHeight="76.0" prefWidth="66.0">
                                              <children>
@@ -153,20 +153,35 @@
                                                       <Insets bottom="5.0" right="5.0" top="5.0" />
                                                    </VBox.margin>
                                                 </Label>
+                                                <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="15.0" prefHeight="30.0" prefWidth="27.0" text="%label.and">
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" right="5.0" top="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
                                              </children>
                                           </VBox>
-                                          <VBox prefHeight="173.0" prefWidth="38.0">
+                                          <VBox prefHeight="76.0" prefWidth="28.0">
                                              <children>
-                                                <TextField fx:id="txtDays" prefHeight="30.0" prefWidth="79.0">
+                                                <TextField fx:id="txtDays" prefHeight="30.0" prefWidth="40.0">
+                                                   <VBox.margin>
+                                                      <Insets top="5.0" />
+                                                   </VBox.margin>
+                                                </TextField>
+                                                <TextField fx:id="txtHours" layoutX="10.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0">
                                                    <VBox.margin>
                                                       <Insets top="5.0" />
                                                    </VBox.margin>
                                                 </TextField>
                                              </children>
                                           </VBox>
-                                          <VBox prefHeight="173.0" prefWidth="37.0">
+                                          <VBox prefHeight="76.0" prefWidth="43.0">
                                              <children>
                                                 <Label prefHeight="30.0" prefWidth="30.0" text="%label.days">
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label layoutX="15.0" layoutY="15.0" prefHeight="30.0" prefWidth="30.0" text="%label.hours">
                                                    <VBox.margin>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </VBox.margin>
@@ -177,7 +192,7 @@
                                     </HBox>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="15.0" layoutY="15.0" prefHeight="80.0" prefWidth="300.0" style="-fx-border-color: lightblue; -fx-border-width: 2; -fx-border-radius: 8;" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                              <AnchorPane layoutX="15.0" layoutY="15.0" prefHeight="80.0" prefWidth="300.0" style="-fx-border-color: lightblue; -fx-border-width: 2; -fx-border-radius: 8;" AnchorPane.leftAnchor="365.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                  <children>
                                     <Label alignment="CENTER_RIGHT" layoutX="9.0" layoutY="9.0" prefHeight="30.0" prefWidth="80.0" text="%label.price.type" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
                                     <ChoiceBox fx:id="comboPriceType" layoutX="87.0" layoutY="10.0" prefHeight="30.0" prefWidth="194.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
@@ -185,7 +200,7 @@
                                     <TextField fx:id="txtArrivalTime" layoutX="92.0" layoutY="42.0" prefHeight="30.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="5.0" layoutY="96.0" prefHeight="150.0" prefWidth="335.0" style="-fx-border-color: lightblue; -fx-border-width: 2; -fx-border-radius: 8;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="90.0">
+                              <AnchorPane layoutX="5.0" layoutY="96.0" prefHeight="150.0" prefWidth="355.0" style="-fx-border-color: lightblue; -fx-border-width: 2; -fx-border-radius: 8;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="90.0">
                                  <children>
                                     <Label alignment="CENTER_RIGHT" layoutX="9.0" layoutY="9.0" prefHeight="30.0" prefWidth="80.0" text="%table.column.level" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0" />
                                     <ChoiceBox fx:id="comboBlock" layoutX="94.0" layoutY="9.0" prefHeight="30.0" prefWidth="198.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="5.0" />
@@ -224,7 +239,7 @@
                                     </Button>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="360.0" layoutY="15.0" prefHeight="150.0" prefWidth="300.0" style="-fx-border-color: lightblue; -fx-border-width: 2; -fx-border-radius: 8;" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="90.0">
+                              <AnchorPane layoutX="360.0" layoutY="15.0" prefHeight="150.0" prefWidth="300.0" style="-fx-border-color: lightblue; -fx-border-width: 2; -fx-border-radius: 8;" AnchorPane.leftAnchor="365.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="90.0">
                                  <children>
                                     <Label alignment="CENTER_RIGHT" layoutX="11.0" layoutY="46.0" prefHeight="30.0" prefWidth="140.0" text="%label.additional.slots" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="40.0" />
                                     <TextField fx:id="txtExtraBadsN" layoutX="113.0" layoutY="44.0" prefHeight="30.0" prefWidth="184.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0" />
@@ -282,7 +297,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                <Tab fx:id="tabRegistration" text="%tab.pane.registration">
+                <Tab fx:id="tabRegistration" disable="true" text="%tab.pane.registration">
                      <content>
                         <AnchorPane prefHeight="455.0" prefWidth="619.0">
                            <children>
@@ -325,19 +340,19 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab fx:id="tabServices" text="%tab.pane.services" />
-                  <Tab fx:id="tabInvoice" text="%tab.pane.invoice" />
-                  <Tab fx:id="tabPayments" text="%tab.pane.payments" />
+                  <Tab fx:id="tabServices" disable="true" text="%tab.pane.services" />
+                  <Tab fx:id="tabInvoice" disable="true" text="%tab.pane.invoice" />
+                  <Tab fx:id="tabPayments" disable="true" text="%tab.pane.payments" />
               </tabs>
             </TabPane>
             <VBox id="DSADD" prefHeight="266.0" prefWidth="105.0" style="-fx-border-color: LIGHTBLUE; -fx-border-width: 2; -fx-border-radius: 8;" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                <children>
-                  <Button fx:id="btnOk1" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#actionSave" prefHeight="25.0" prefWidth="80.0" text="%menu.title.save">
+                  <Button fx:id="btnOk" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#actionSave" prefHeight="25.0" prefWidth="80.0" text="%menu.title.save">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="btnCancel1" cancelButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#actionClose" prefHeight="25.0" prefWidth="80.0" text="%button.cancel">
+                  <Button fx:id="btnCancel" cancelButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#actionClose" prefHeight="25.0" prefWidth="80.0" text="%button.cancel">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>

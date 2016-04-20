@@ -4,23 +4,34 @@ import com.nov.hotel.collections.impl.AllocClientCollection;
 import com.nov.hotel.collections.interfaces.ObservableCollection;
 import com.nov.hotel.entities.interfaces.Entity;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Allocation implements Entity<Long, Allocation>, Comparable<Allocation> {
 
     private Long id = new Long(0);
     private Long invoiceId;
     private ObjectProperty<Apartment> room = new SimpleObjectProperty<>();
-    private ObjectProperty<LocalDateTime> startDate = new SimpleObjectProperty<>();
-    private ObjectProperty<LocalDateTime> endDate = new SimpleObjectProperty<>();
+    private ObjectProperty<LocalDate> startDate = new SimpleObjectProperty<>();
+    private ObjectProperty<LocalTime> startTime = new SimpleObjectProperty<>();
+    private ObjectProperty<LocalDate> endDate = new SimpleObjectProperty<>();
+    private ObjectProperty<LocalTime> endTime = new SimpleObjectProperty<>();
     private ObjectProperty<LocalDateTime> arrivalDate = new SimpleObjectProperty<>();
     private ObjectProperty<Price> priceType = new SimpleObjectProperty<>();
     private IntegerProperty masterBedsN = new SimpleIntegerProperty();
     private IntegerProperty extraBedsN = new SimpleIntegerProperty();
     private ObjectProperty<ApartStatus> allocType = new SimpleObjectProperty<>();
-    private ObservableList<AllocClient> clients = new SimpleListProperty<>();
+
+    @Override
+    public String toString() {
+        return room.get().getRoomNumber();
+    }
+
+    private ObservableList<AllocClient> clients = FXCollections.observableArrayList();
 
     public Allocation() {
     }
@@ -55,6 +66,7 @@ public class Allocation implements Entity<Long, Allocation>, Comparable<Allocati
         return 0;
     }
 
+
     @Override
     public Long getId() {
         return id;
@@ -85,28 +97,52 @@ public class Allocation implements Entity<Long, Allocation>, Comparable<Allocati
         this.room.set(room);
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate.get();
     }
 
-    public ObjectProperty<LocalDateTime> startDateProperty() {
+    public ObjectProperty<LocalDate> startDateProperty() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate.set(startDate);
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalTime getStartTime() {
+        return startTime.get();
+    }
+
+    public ObjectProperty<LocalTime> startTimeProperty() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime.set(startTime);
+    }
+
+    public LocalDate getEndDate() {
         return endDate.get();
     }
 
-    public ObjectProperty<LocalDateTime> endDateProperty() {
+    public ObjectProperty<LocalDate> endDateProperty() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate.set(endDate);
+    }
+
+    public LocalTime getEndTime() {
+        return endTime.get();
+    }
+
+    public ObjectProperty<LocalTime> endTimeProperty() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime.set(endTime);
     }
 
     public LocalDateTime getArrivalDate() {

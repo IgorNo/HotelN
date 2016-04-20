@@ -43,12 +43,12 @@ public class ClientEditController extends AbstractEditDialogController<Long, Cli
     public TextField txtDiscount;
 
 
-    ObservableCollection<Country> countries = CountryCollection.getInstance().readAllData();
-    ObservableCollection<DocumType> docTypes = DocumTypeCollection.getInstance().readAllData();
-    ObservableCollection<Region> regionsAll = RegionCollection.getInstance().readAllData();
-    ObservableCollection<ClientType> types = ClientTypeCollection.getInstance().readAllData();
+    private ObservableCollection<Country> countries = CountryCollection.getInstance().readAllData();
+    private ObservableCollection<DocumType> docTypes = DocumTypeCollection.getInstance().readAllData();
+    private ObservableCollection<Region> regionsAll = RegionCollection.getInstance().readAllData();
+    private ObservableCollection<ClientType> types = ClientTypeCollection.getInstance().readAllData();
 
-    ObservableList<Region> regionsCountry;
+    private ObservableList<Region> regionsCountry;
 
     @Override
     protected void fillField() {
@@ -81,14 +81,15 @@ public class ClientEditController extends AbstractEditDialogController<Long, Cli
         comboCountry.setItems(countries.getViewList());
         comboCountry.getSelectionModel().select(getElem().getRegionAddress().getCountry());
         comboCountry.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                    Country currCountry = (Country) comboCountry.getValue();
-                    regionsCountry = regionsAll.getViewList().filtered((a) -> a.getCountry().getId().equals(currCountry.getId()));
+            @Override
+            public void handle(ActionEvent e) {
+                Country currCountry = (Country) comboCountry.getValue();
+                regionsCountry = regionsAll.getViewList().filtered((a) -> a.getCountry().getId().equals(currCountry.getId()));
                 comboRegion.setItems(regionsCountry);
 //                if ( !regionsCountry.isEmpty() )
 //                    comboRegion.getSelectionModel().select(getElem().getRegionAddress());
 //                else
-                    comboRegion.getSelectionModel().select(null);
+                comboRegion.getSelectionModel().select(null);
             }
         });
 

@@ -25,8 +25,8 @@ public class ApartmentEditController extends AbstractEditDialogController<Long,A
     public TextField txtLevel;
     public CheckBox chekbStatus;
 
-    ObservableCollection<Block> blocks = BlockCollection.getInstance().readAllData();
-    ObservableCollection<ApartType> types = ApartTypeCollection.getInstance().readAllData();
+    private ObservableCollection<Block> blocks = BlockCollection.getInstance().readAllData();
+    private ObservableCollection<ApartType> types = ApartTypeCollection.getInstance().readAllData();
 
     @Override
     protected void fillField() {

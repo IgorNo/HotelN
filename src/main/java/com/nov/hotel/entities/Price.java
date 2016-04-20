@@ -29,6 +29,11 @@ public class Price implements Entity<Integer, Price>, Comparable<Price> {
         return getId() != null && getName() != null && !getName().trim().isEmpty();
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
+
     public Integer getId() {
         return id;
     }

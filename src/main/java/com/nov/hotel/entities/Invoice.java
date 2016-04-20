@@ -6,6 +6,7 @@ import com.nov.hotel.collections.interfaces.ObservableCollection;
 import com.nov.hotel.entities.interfaces.Customer;
 import com.nov.hotel.entities.interfaces.Entity;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
@@ -20,10 +21,15 @@ public class Invoice implements Entity<Long, Invoice>, Comparable<Invoice> {
     private FloatProperty amount = new SimpleFloatProperty();
     private ObjectProperty<Customer> customer = new SimpleObjectProperty<>();
     private ObjectProperty<User> user = new SimpleObjectProperty<>();
-    private ObservableList<Allocation> allocations = new SimpleListProperty<>();
+    private ObservableList<Allocation> allocations = FXCollections.observableArrayList();
 
     public Invoice() {
         setInvoiceDate(LocalDate.now());
+    }
+
+    public Invoice(Invoice elem) {
+        this();
+        assign(elem);
     }
 
     @Override

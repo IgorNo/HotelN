@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -48,11 +49,14 @@ public class TestAllocationDaoImpl {
 
         for (Integer i = 0; i < N; i++) {
             Allocation elem = new Allocation();
+            LocalDate date = LocalDate.now();
+            LocalTime time = LocalTime.of(12,0);
+            elem.setStartDate(date);
+            elem.setStartTime(time);
+            elem.setEndDate(date.plusDays(i+1));
+            elem.setEndTime(time);
             LocalDateTime dateTime = LocalDateTime.now();
-            int second = dateTime.getSecond();
-            dateTime = dateTime.withNano(0).withSecond(0).withMinute(0).withHour(12);
-            elem.setStartDate(dateTime);
-            elem.setEndDate(dateTime.plusDays(i+1));
+            dateTime = dateTime.withNano(0).withSecond(0).withMinute(0);
             elem.setArrivalDate(dateTime.plusHours(1));
             testData.add(elem);
         }
@@ -142,10 +146,11 @@ public class TestAllocationDaoImpl {
     public void testUpdate(){
         Allocation elem = testData.get(0);
         LocalDateTime dateTime = LocalDateTime.now();
-        int second = dateTime.getSecond();
         dateTime = dateTime.withNano(0).withSecond(0).withMinute(0).withHour(11);
-        elem.setStartDate(dateTime);
-        elem.setEndDate(dateTime.plusDays(1));
+        elem.setStartDate(dateTime.toLocalDate());
+        elem.setStartTime(dateTime.toLocalTime());
+        elem.setEndDate(dateTime.toLocalDate().plusDays(1));
+        elem.setEndTime(dateTime.toLocalTime());
         elem.setArrivalDate(dateTime.plusHours(1));
         dao.update(elem);
         Allocation elemUp = dao.getRow(elem.getId());

@@ -2,23 +2,23 @@ package com.nov.hotel.gui.controllers;
 
 
 import com.nov.hotel.collections.impl.*;
-import com.nov.hotel.entities.Block;
+import com.nov.hotel.entities.Invoice;
 import com.nov.hotel.gui.controllers.abstr.AbstractController;
-import com.nov.hotel.gui.controllers.abstr.AbstractTableController;
-import com.nov.hotel.gui.controllers.interfaces.Controller;
+import com.nov.hotel.gui.controllers.abstr.AbstractEditDialogController;
 import com.nov.hotel.gui.windows.impl.AbstractWindow;
 import com.nov.hotel.gui.windows.impl.*;
 import javafx.event.ActionEvent;
 
 public class MainController extends AbstractController {
 
-    AbstractWindow settlingWindow;
-    AbstractWindow priceListWindow;
-    AbstractWindow apartmentsWindow;
-    AbstractWindow servicesWindow;
-    AbstractWindow apartStatusWindow;
-    AbstractWindow blocksWindow;
-    AbstractWindow clientWindow;
+    private AbstractWindow settlingWindow;
+    private AbstractWindow priceListWindow;
+    private AbstractWindow apartmentsWindow;
+    private AbstractWindow servicesWindow;
+    private AbstractWindow apartStatusWindow;
+    private AbstractWindow blocksWindow;
+    private AbstractWindow clientWindow;
+//    private AbstractEditDialogController invoiceEC;
     
 
     public void hotelSettling(ActionEvent actionEvent) {

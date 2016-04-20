@@ -2,23 +2,16 @@ package com.nov.hotel.dao.impl;
 
 import com.nov.hotel.collections.impl.AllocationCollection;
 import com.nov.hotel.dao.abstr.CrudDaoAbstractLong;
-import com.nov.hotel.entities.Allocation;
-import com.nov.hotel.entities.ApartStatus;
-import com.nov.hotel.entities.Apartment;
-import com.nov.hotel.entities.Price;
-import com.nov.hotel.main.Start;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.nov.hotel.entities.*;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-
-import static com.nov.hotel.main.Start.APPLICATION_CONTEXT;
+import java.util.List;
 
 @Repository("allocationDao")
 public class AllocationDaoImpl extends CrudDaoAbstractLong<Allocation>{
@@ -38,6 +31,7 @@ public class AllocationDaoImpl extends CrudDaoAbstractLong<Allocation>{
         sqlSelectSingle = "SELECT * FROM allocation_view WHERE invd_id_n";
         sqlSelectSome = "SELECT * FROM allocation_view WHERE invd_invoice_fk";
         sqlSelectAll = "SELECT * FROM allocation_view";
+
     }
 
     @Override
@@ -46,8 +40,8 @@ public class AllocationDaoImpl extends CrudDaoAbstractLong<Allocation>{
         params.addValue("id", elem.getId());
         params.addValue("invoice", elem.getInvoiceId());
         params.addValue("room", elem.getRoom().getId());
-        params.addValue("sDate", Timestamp.valueOf(elem.getStartDate()));
-        params.addValue("eDate", Timestamp.valueOf(elem.getEndDate()));
+        params.addValue("sDate", Timestamp.valueOf(LocalDateTime.of(elem.getStartDate(), elem.getStartTime())));
+        params.addValue("eDate", Timestamp.valueOf(LocalDateTime.of(elem.getEndDate(), elem.getEndTime())));
         params.addValue("aDate", Timestamp.valueOf(elem.getArrivalDate()));
         params.addValue("price", elem.getPriceType().getId());
         params.addValue("mBeds", elem.getMasterBedsN());
@@ -71,8 +65,10 @@ public class AllocationDaoImpl extends CrudDaoAbstractLong<Allocation>{
             allocation.setId(rs.getLong("invd_id_n"));
             allocation.setInvoiceId(rs.getLong("invd_invoice_fk"));
             allocation.setRoom(room);
-            allocation.setStartDate(rs.getTimestamp("invd_start_date_dt").toLocalDateTime());
-            allocation.setEndDate(rs.getTimestamp("invd_end_date_dt").toLocalDateTime());
+            allocation.setStartDate(rs.getTimestamp("invd_start_date_dt").toLocalDateTime().toLocalDate());
+            allocation.setStartTime(rs.getTimestamp("invd_start_date_dt").toLocalDateTime().toLocalTime());
+            allocation.setEndDate(rs.getTimestamp("invd_end_date_dt").toLocalDateTime().toLocalDate());
+            allocation.setEndTime(rs.getTimestamp("invd_end_date_dt").toLocalDateTime().toLocalTime());
             allocation.setArrivalDate(rs.getTimestamp("invd_dt_arriv_dt").toLocalDateTime());
             allocation.setPriceType(price);
             allocation.setMasterBedsN(rs.getInt("invd_master_beds_n"));

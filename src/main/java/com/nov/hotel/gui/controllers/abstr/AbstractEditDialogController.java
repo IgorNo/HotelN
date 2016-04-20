@@ -40,7 +40,7 @@ abstract public class AbstractEditDialogController<K, E extends Entity<K,E>>  ex
         validationSupport.setValidationDecorator(new StyleClassValidationDecoration());
     }
     // Pattern Template Method
-    protected void setElem(E elem) {
+    public void setElem(E elem) {
         if (elem == null){
             return;
         }
