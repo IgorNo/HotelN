@@ -48,25 +48,27 @@ public class ApartmentDaoImpl extends CrudDaoAbstractLong<Apartment> {
 
     public List<Apartment> getSelectedRoom(RoomQuery query){
         String sql = "SELECT * FROM apartments_view WHERE ";
-        if (query.getType() != null) sql += "apart_type_fk = :type AND";
-        if (query.getBlock() != null) sql += "apart_block_fk = :block AND";
+        if (query.getType() != null) sql += "apart_type_fk = :type AND ";
+        if (query.getBlock() != null) sql += "apart_block_fk = :block AND ";
         if (query.getLevel() != null){
-//            sql += "apart_level_number_n " + query.getCompOper().getStrOper() + " :level AND";
+//            sql += "apart_level_number_n " + query.getCompOper().getStrOper() + " :level AND ";
         }
         sql += "NOT apart_id_n IN ( " + sqlOccupiedRoom + ") ";
 
         return jdbcTemplate.query(sql, getQueryParams(query), getRowMapper());
     }
 
-    protected MapSqlParameterSource getQueryParams(RoomQuery elem) {
+    protected MapSqlParameterSource getQueryParams(RoomQuery query) {
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("block", elem.getBlock().getId());
-        params.addValue("level", elem.getLevel());
-        params.addValue("type", elem.getType().getId());
-        params.addValue("startDate", Timestamp.valueOf(elem.getDtStart()));
-        params.addValue("endDate", Timestamp.valueOf(elem.getDtEnd()));
-        params.addValue("mBeds", elem.getmBedsN());
-        params.addValue("eBeds", elem.geteBedN());
+        if (query.getBlock() != null)
+            params.addValue("block", query.getBlock().getId());
+        params.addValue("level", query.getLevel());
+        if (query.getType() != null)
+            params.addValue("type", query.getType().getId());
+        params.addValue("startDate", Timestamp.valueOf(query.getDtStart()));
+        params.addValue("endDate", Timestamp.valueOf(query.getDtEnd()));
+        params.addValue("mBeds", query.getmBedsN());
+        params.addValue("eBeds", query.geteBedN());
         return params;
     }
 

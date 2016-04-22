@@ -83,6 +83,7 @@ abstract public class AbstractTableController<E extends Entity> extends Abstract
     }
 
     public void actionClose(ActionEvent actionEvent) {
+//        selectedElem = null;
         if (collection.isChanged()) {
             Optional<ButtonType> result = DialogManager.showConfirmDialog(rBundle.getString("message.alert"), rBundle.getString("message.save.data"));
             if (result.get() == ButtonType.OK) {
@@ -96,6 +97,7 @@ abstract public class AbstractTableController<E extends Entity> extends Abstract
     }
 
     public void save(ActionEvent actionEvent) {
+ //       selectedElem = null;
         String errMsg = collection.saveChanges();
         if (errMsg.length() > 0) {
             DialogManager.showErrorDialog(rBundle.getString("message.error"), errMsg);
@@ -259,5 +261,6 @@ abstract public class AbstractTableController<E extends Entity> extends Abstract
     private void updateCountLabel() {
         labelCount.setText(rBundle.getString("label.records") + ": " + collection.getViewList().size());
     }
+
 
 }

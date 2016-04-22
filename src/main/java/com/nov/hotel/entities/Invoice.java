@@ -21,7 +21,7 @@ public class Invoice implements Entity<Long, Invoice>, Comparable<Invoice> {
     private FloatProperty amount = new SimpleFloatProperty();
     private ObjectProperty<Customer> customer = new SimpleObjectProperty<>();
     private ObjectProperty<User> user = new SimpleObjectProperty<>();
-    private ObservableList<Allocation> allocations = FXCollections.observableArrayList();
+    private ObservableCollection<Allocation> allocationCollection = AllocationCollection.getInstance();
 
     public Invoice() {
         setInvoiceDate(LocalDate.now());
@@ -126,11 +126,11 @@ public class Invoice implements Entity<Long, Invoice>, Comparable<Invoice> {
     }
 
     public ObservableList<Allocation> getAllocations() {
-        return allocations;
+        return allocationCollection.getViewList();
     }
 
-    public void setAllocations(ObservableList<Allocation> allocations) {
-        this.allocations = allocations;
+    public ObservableCollection<Allocation> getAllocationCollection() {
+        return allocationCollection;
     }
 
     @Override

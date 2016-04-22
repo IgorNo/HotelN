@@ -92,13 +92,13 @@ public abstract class AbstractWindow implements Singelton<AbstractWindow> {
         try {
             Parent parent = loader.load();
             scene = new Scene(parent);
+            controller = loader.getController();
+            controller.setItsWindow(this);
+            scene.getStylesheets().add(properties.style);
         } catch (IOException e) {
             LOG.error("Can't load resource", e);
             throw new RuntimeException(e);
         }
-        controller = loader.getController();
-        controller.setItsWindow(this);
-        scene.getStylesheets().add(properties.style);
     }
 
     public void initOwner(Stage ownerStage){

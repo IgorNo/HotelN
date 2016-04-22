@@ -10,7 +10,7 @@ import static com.nov.hotel.main.Start.APPLICATION_CONTEXT;
 
 public class AllocClientCollection extends ObserCollecAbstract<AllocClient> {
 
-    private static AllocClientsDaoImpl dao = (AllocClientsDaoImpl) APPLICATION_CONTEXT.getBean("alloClientcDao");
+    private static AllocClientsDaoImpl dao = (AllocClientsDaoImpl) APPLICATION_CONTEXT.getBean("allocClientsDao");
 
     private static AllocClientCollection uniqueObsColl;
 

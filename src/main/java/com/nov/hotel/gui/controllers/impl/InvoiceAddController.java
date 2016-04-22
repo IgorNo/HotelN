@@ -24,6 +24,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
@@ -36,13 +37,14 @@ import java.util.ResourceBundle;
 
 public class InvoiceAddController extends AbstractController implements Initializable {
 
+    private static final String ROOM_NOT_SELECTED = "????";
     private Invoice invoice = new Invoice();
-    private ResourceBundle resourceBundle;
+    private ResourceBundle rBundle;
     private ValidationSupport validationSupport = new ValidationSupport();
 
     private AbstractWindow clientWindow = ClientsWindow.getInstance();
 
-    private ObservableCollection<Allocation> allocations = AllocationCollection.getInstance();
+//    private ObservableCollection<Allocation> allocations = AllocationCollection.getInstance();
     private ObservableCollection<Block> blocks = BlockCollection.getInstance().readAllData();
     private ObservableCollection<ApartType> types = ApartTypeCollection.getInstance().readAllData();
     private ObservableCollection<Price> prices = PriceCollection.getInstance().readAllData();
@@ -93,34 +95,48 @@ public class InvoiceAddController extends AbstractController implements Initiali
     public TextField txtAmount;
 
     public Tab tabRegistration;
+    
+    public TableView tableClients;
+    public TableColumn columnName;
+    public TableColumn columnSex;
+    public TableColumn columnBirthday;
+    public TableColumn columnPassport;
+    public TableColumn columnCountry;
+
+    public TextField txtRoom;
+    public TextField txtPersons;
+    public TextField txtBeds;
+
     public Tab tabServices;
     public Tab tabInvoice;
     public Tab tabPayments;
 
     public AnchorPane anchorpSelRoom;
 
-    FloatProperty priceDay = new SimpleFloatProperty();
-    FloatProperty priceHour = new SimpleFloatProperty();
-    FloatProperty priceSlot = new SimpleFloatProperty();
-    IntegerProperty days = new SimpleIntegerProperty();
-    IntegerProperty hours = new SimpleIntegerProperty();
-    IntegerProperty mBedsN = new SimpleIntegerProperty();
-    IntegerProperty eBedsN = new SimpleIntegerProperty();
+    private FloatProperty priceDay = new SimpleFloatProperty();
+    private FloatProperty priceHour = new SimpleFloatProperty();
+    private FloatProperty priceSlot = new SimpleFloatProperty();
+    private IntegerProperty days = new SimpleIntegerProperty();
+    private IntegerProperty hours = new SimpleIntegerProperty();
+    private IntegerProperty mBedsN = new SimpleIntegerProperty();
+    private IntegerProperty eBedsN = new SimpleIntegerProperty();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.resourceBundle = resources;
+        this.rBundle = resources;
         validationSupport.setValidationDecorator(new StyleClassValidationDecoration());
         fillField();
         initListeners();
+        fillFieldAccomodation();
+        initListenersAccomodation();
+        fillFieldRegistration();
     }
 
-
-    protected void fillField() {
+    private void fillField() {
         txtInvoiceNumber.setText(invoice.getInvoiceN());
-        validationSupport.registerValidator(txtInvoiceNumber, Validator.createEmptyValidator(resourceBundle.getString("prompt.text")));
+        validationSupport.registerValidator(txtInvoiceNumber, Validator.createEmptyValidator(rBundle.getString("prompt.text")));
         datepInvoice.setValue(invoice.getInvoiceDate());
-        validationSupport.registerValidator(datepInvoice, Validator.createEmptyValidator(resourceBundle.getString("prompt.date")));
+        validationSupport.registerValidator(datepInvoice, Validator.createEmptyValidator(rBundle.getString("prompt.date")));
 
         rbtIndivid.setSelected(true);
         if (invoice.getCustomer() != null) {
@@ -137,9 +153,12 @@ public class InvoiceAddController extends AbstractController implements Initiali
             tabRegistration.setDisable(true);
             tabServices.setDisable(true);
         }
-        validationSupport.registerValidator(txtCustomer, Validator.createEmptyValidator(resourceBundle.getString("prompt.text")));
+        validationSupport.registerValidator(txtCustomer, Validator.createEmptyValidator(rBundle.getString("prompt.text")));
 
         listvRoom.setItems(invoice.getAllocations());
+    }
+
+    protected void fillFieldAccomodation() {
 
         comboBlock.setItems(blocks.getViewList());
         comboRoomType.setItems(types.getViewList());
@@ -147,112 +166,50 @@ public class InvoiceAddController extends AbstractController implements Initiali
 
     }
 
-    protected void saveField() {
+    private void fillFieldRegistration() {
 
+        columnName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        columnSex.setCellValueFactory(new PropertyValueFactory<>("sex"));
+        // Custom rendering of the table cell.
+        columnSex.setCellFactory(column -> {
+            return new TableCell<Client, Boolean>(){
+                @Override
+                protected void updateItem(Boolean item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) setText(null);
+                    else {
+                        if (item) setText("  "+rBundle.getString("radio.button.man"));
+                        else setText("  "+rBundle.getString("radio.button.woman"));
+                    }
+                }
+            };
+        });
+
+        columnBirthday.setCellValueFactory(new PropertyValueFactory<>("birthday"));
+        columnPassport.setCellValueFactory(new PropertyValueFactory<>("passport"));
+        columnCountry.setCellValueFactory(new PropertyValueFactory<>("citizenship"));
     }
 
-    public void actionClose(ActionEvent actionEvent) {
-        closeWindow();
-    }
-
-    public void selectCustomer(ActionEvent actionEvent) {
-        if (rbtIndivid.isSelected()) {
-            clientWindow.initOwner(SettlingWindow.getInstance().getStage());
-            ClientCollection.getInstance().readAllData();
-            clientWindow.showAndWait();
-            AbstractTableController<Client> controller = clientWindow.getLoader().getController();
-            if (controller.getSelectedElem() != null) {
-                invoice.setCustomer(controller.getSelectedElem());
-                txtCustomer.setText(controller.getSelectedElem().fullNameProperty().getValue());
-                anchorpSelRoom.setDisable(false);
-            }
-        }
-
-    }
-
-    public void addRoom(ActionEvent actionEvent) {
-        Allocation allocation = new Allocation();
-        Apartment room = new Apartment();
-        room.setRoomNumber("????");
-        allocation.setRoom(room);
-        LocalDate date = LocalDate.now();
-        allocation.setStartDate(date);
-        allocation.setStartTime(Start.SETTINGS.getStartTime());
-        allocation.setEndDate(date.plusDays(1));
-        allocation.setEndTime(Start.SETTINGS.getEndTime());
-        LocalTime nowTime = LocalTime.now();
-        nowTime = nowTime.withNano(0).withSecond(0).withMinute(0);
-        allocation.setArrivalDate(LocalDateTime.of(date, nowTime));
-        invoice.getAllocations().add(allocation);
-        listvRoom.getSelectionModel().select(allocation);
-    }
-
-    public void deleteRoom(ActionEvent actionEvent) {
-        invoice.getAllocations().remove(listvRoom.getSelectionModel().getSelectedItem());
-    }
-
-    public void selectBlock(ActionEvent actionEvent) {
-        AbstractWindow window = BlockWindow.getInstance();
-        window.initOwner(SettlingWindow.getInstance().getStage());
-        window.showAndWait();
-        AbstractTableController<Block> controller = window.getLoader().getController();
-        if (controller.getSelectedElem() != null) {
-            comboBlock.getSelectionModel().select(controller.getSelectedElem());
-        }
-    }
-
-    public void selectRoomType(ActionEvent actionEvent) {
-        AbstractWindow window = ApartTypeWindow.getInstance();
-        window.initOwner(SettlingWindow.getInstance().getStage());
-        window.showAndWait();
-        AbstractTableController<ApartType> controller = window.getLoader().getController();
-        if (controller.getSelectedElem() != null) {
-            comboRoomType.getSelectionModel().select(controller.getSelectedElem());
-        }
-    }
-
-    public void accomMap(ActionEvent actionEvent) {
-
-    }
-
-    public void selectRooms(ActionEvent actionEvent) {
-        RoomQuery query = new RoomQuery();
-        query.setBlock((Block) comboBlock.getSelectionModel().getSelectedItem());
-        query.setType((ApartType) comboRoomType.getSelectionModel().getSelectedItem());
-        if (!txtLevel.getText().isEmpty()) query.setLevel(Integer.parseInt(txtLevel.getText()));
-        if (!txtMasterBadsN.getText().isEmpty()) query.setmBedsN(Integer.parseInt(txtLevel.getText()));
-        if (!txtExtraBadsN.getText().isEmpty()) query.seteBedN(Integer.parseInt(txtLevel.getText()));
-        query.setDtStart(LocalDateTime.of(datepStart.getValue(), LocalTime.parse(txtStartTime.getText())));
-        query.setDtEnd(LocalDateTime.of(datepEnd.getValue(), LocalTime.parse(txtEndTime.getText())));
-        selectedRooms.clear();
-        selectedRooms.addAll(GetSelectedRoom.getInstance().get(query));
-        comboSelectedRoom.setItems(selectedRooms);
-    }
-
-    public void saveRoom(ActionEvent actionEvent) {
-    }
-
-    public void actionSave(ActionEvent actionEvent) {
-        try {
-            saveField();
-            closeWindow();
-        } catch (NumberFormatException e){
-            DialogManager.showInfoDialog(resourceBundle.getString("message.error"), resourceBundle.getString("message.invalid.data"));
-            return;
-        }
-    }
-
-    protected void initListeners() {
-
+    private void initListeners() {
         // Listen for selection changes and show the person details when changed.
         listvRoom.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showAllocation((Allocation) newValue));
+                (observable, oldValue, newValue) -> changeAllocation((Allocation) newValue));
 
         invoice.getAllocations().addListener(new ListChangeListener<Allocation>() {
             @Override
             public void onChanged(Change<? extends Allocation> c) {
-                if (invoice.getAllocations().size() > 0)
+                if (invoice.getAllocations().size() > 0) {
                     tabAccomodation.setDisable(false);
+                }
+            }
+        });
+    }
+
+    protected void initListenersAccomodation() {
+
+        comboSelectedRoom.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
             }
         });
 
@@ -317,6 +274,10 @@ public class InvoiceAddController extends AbstractController implements Initiali
                 (observable, oldValue, newValue) -> setStartEnd()
         );
 
+        txtEndTime.textProperty().addListener(
+                (observable, oldValue, newValue) -> setStartEnd()
+        );
+
         datepStart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -336,6 +297,90 @@ public class InvoiceAddController extends AbstractController implements Initiali
         txtPriceSlot.textProperty().bind(priceSlot.asString());
         txtAmount.textProperty().bind(amount());
     }
+
+    protected void saveField() {
+
+    }
+
+    public void actionClose(ActionEvent actionEvent) {
+        closeWindow();
+    }
+
+    public void selectCustomer(ActionEvent actionEvent) {
+        if (rbtIndivid.isSelected()) {
+            Client selectedClient = getClient();
+            if (selectedClient != null) {
+                invoice.setCustomer(selectedClient);
+                txtCustomer.setText(selectedClient.fullNameProperty().getValue());
+                anchorpSelRoom.setDisable(false);
+            }
+        }
+    }
+
+    public void addRoom(ActionEvent actionEvent) {
+        Allocation allocation = new Allocation();
+        Apartment room = new Apartment();
+        room.setRoomNumber(ROOM_NOT_SELECTED);
+        allocation.setRoom(room);
+        LocalDate date = LocalDate.now();
+        allocation.setStartDate(date);
+        allocation.setStartTime(Start.SETTINGS.getStartTime());
+        allocation.setEndDate(date.plusDays(1));
+        allocation.setEndTime(Start.SETTINGS.getEndTime());
+        LocalTime nowTime = LocalTime.now();
+        nowTime = nowTime.withNano(0).withSecond(0).withMinute(0);
+        allocation.setArrivalDate(LocalDateTime.of(date, nowTime));
+        invoice.getAllocationCollection().add(allocation);
+        listvRoom.getSelectionModel().select(allocation);
+        selectedRooms.clear();
+    }
+
+    public void deleteRoom(ActionEvent actionEvent) {
+        invoice.getAllocations().remove(listvRoom.getSelectionModel().getSelectedItem());
+    }
+
+    public void resetBlock(ActionEvent actionEvent) {
+        comboBlock.getSelectionModel().select(null);
+    }
+
+    public void resetRoomType(ActionEvent actionEvent) {
+        comboRoomType.getSelectionModel().select(null);
+    }
+
+    public void accomMap(ActionEvent actionEvent) {
+
+    }
+
+    public void selectRooms(ActionEvent actionEvent) {
+        RoomQuery query = new RoomQuery();
+        query.setBlock((Block) comboBlock.getSelectionModel().getSelectedItem());
+        query.setType((ApartType) comboRoomType.getSelectionModel().getSelectedItem());
+        if (!txtLevel.getText().isEmpty()) query.setLevel(Integer.parseInt(txtLevel.getText()));
+        if (!txtMasterBadsN.getText().isEmpty()) query.setmBedsN(Integer.parseInt(txtLevel.getText()));
+        if (!txtExtraBadsN.getText().isEmpty()) query.seteBedN(Integer.parseInt(txtLevel.getText()));
+        query.setDtStart(LocalDateTime.of(datepStart.getValue(), LocalTime.parse(txtStartTime.getText())));
+        query.setDtEnd(LocalDateTime.of(datepEnd.getValue(), LocalTime.parse(txtEndTime.getText())));
+        selectedRooms.clear();
+        selectedRooms.addAll(GetSelectedRoom.getInstance().get(query));
+        comboSelectedRoom.setItems(selectedRooms);
+    }
+
+    public void saveRoom(ActionEvent actionEvent) {
+        Allocation allocation = (Allocation) listvRoom.getSelectionModel().getSelectedItem();
+        allocation.setRoom((Apartment) comboSelectedRoom.getSelectionModel().getSelectedItem());
+        listvRoom.setItems(invoice.getAllocations());
+    }
+
+    public void actionSave(ActionEvent actionEvent) {
+        try {
+            saveField();
+            closeWindow();
+        } catch (NumberFormatException e){
+            DialogManager.showInfoDialog(rBundle.getString("message.error"), rBundle.getString("message.invalid.data"));
+            return;
+        }
+    }
+
 
     private void setStartEnd() {
         try {
@@ -383,32 +428,71 @@ public class InvoiceAddController extends AbstractController implements Initiali
         }
     }
 
-    private void showAllocation(Allocation alloc){
-        datepStart.setValue(alloc.getStartDate());
-        txtStartTime.setText(alloc.getStartTime().toString());
-        datepEnd.setValue(alloc.getEndDate());
-        txtEndTime.setText(alloc.getEndTime().toString());
-        Period nDays = alloc.getStartDate().until(alloc.getEndDate());
-        txtDays.setText(Integer.toString(nDays.getDays()));
-        days.set(nDays.getDays());
-        int nHours = alloc.getEndTime().getHour() - Start.SETTINGS.getEndTime().getHour();
-        hours.set(nHours);
+    private void changeAllocation(Allocation alloc){
+        if (alloc != null) {
+            datepStart.setValue(alloc.getStartDate());
+            txtStartTime.setText(alloc.getStartTime().toString());
+            datepEnd.setValue(alloc.getEndDate());
+            txtEndTime.setText(alloc.getEndTime().toString());
+            Period nDays = alloc.getStartDate().until(alloc.getEndDate());
+            txtDays.setText(Integer.toString(nDays.getDays()));
+            days.set(nDays.getDays());
+            int nHours = alloc.getEndTime().getHour() - Start.SETTINGS.getEndTime().getHour();
+            hours.set(nHours);
 
-        txtArrivalTime.setText(alloc.getArrivalDate().toString());
-        comboPriceType.getSelectionModel().select(alloc.getPriceType());
+            txtArrivalTime.setText(alloc.getArrivalDate().toString());
+            comboPriceType.getSelectionModel().select(alloc.getPriceType());
 
-        comboBlock.getSelectionModel().select(alloc.getRoom().getBlock());
-        txtLevel.setText(Integer.toString(alloc.getRoom().getLevelNumber()));
-        comboRoomType.getSelectionModel().select(alloc.getRoom().getType());
+            comboBlock.getSelectionModel().select(alloc.getRoom().getBlock());
+            txtLevel.setText(Integer.toString(alloc.getRoom().getLevelNumber()));
+            comboRoomType.getSelectionModel().select(alloc.getRoom().getType());
 
-        changePriceValues((Price)comboPriceType.getSelectionModel().getSelectedItem(), (ApartType)comboRoomType.getSelectionModel().getSelectedItem());
+            changePriceValues((Price) comboPriceType.getSelectionModel().getSelectedItem(), (ApartType) comboRoomType.getSelectionModel().getSelectedItem());
 
-        if (alloc.getRoom().getType() != null) {
-            txtMasterBadsN.setText(Integer.toString(alloc.getRoom().getType().getSize()));
-            txtExtraBadsN.setText(Integer.toString(alloc.getRoom().getType().getnSlots()));
+            if (alloc.getRoom().getRoomNumber().equals(ROOM_NOT_SELECTED)) {
+                txtMasterBadsN.setText("1");
+                txtExtraBadsN.setText("0");
+            } else {
+                txtMasterBadsN.setText(Integer.toString(alloc.getMasterBedsN()));
+                txtExtraBadsN.setText(Integer.toString(alloc.getExtraBedsN()));
+            }
+            tabRegistration.setDisable(false);
+            ObservableList<AllocClient> clients = alloc.getAllocClients();
+            tableClients.setItems(clients);
         } else {
-            txtMasterBadsN.setText("1");
-            txtExtraBadsN.setText("0");
+            tabAccomodation.setDisable(true);
+            tabRegistration.setDisable(true);
+        }
+
+    }
+
+    public void addClient(ActionEvent actionEvent) {
+        Client selectedClient = getClient();
+        if (selectedClient != null) {
+            Allocation currAllocation = (Allocation) listvRoom.getSelectionModel().getSelectedItem();
+            currAllocation.getAllocClientCollection().add(new AllocClient(currAllocation.getId(), selectedClient));
+        }
+    }
+
+    private Client getClient() {
+        clientWindow.initOwner(SettlingWindow.getInstance().getStage());
+        ClientCollection.getInstance().readAllData();
+        AbstractTableController<Client> controller = clientWindow.getLoader().getController();
+        clientWindow.showAndWait();
+        return controller.getSelectedElem();
+    }
+
+    public void delClient(ActionEvent actionEvent) {
+        Allocation currAllocation = (Allocation) listvRoom.getSelectionModel().getSelectedItem();
+        currAllocation.getAllocClientCollection().delete((AllocClient)tableClients.getSelectionModel().getSelectedItem());
+    }
+
+    public void addOwner(ActionEvent actionEvent) {
+        String className = invoice.getCustomer().getClass().getSimpleName();
+        if (className.equals("Client")) {
+            Client client = (Client)invoice.getCustomer();
+            Allocation currAllocation = (Allocation) listvRoom.getSelectionModel().getSelectedItem();
+            currAllocation.getAllocClients().add(new AllocClient(currAllocation.getId(), client));
         }
     }
 }

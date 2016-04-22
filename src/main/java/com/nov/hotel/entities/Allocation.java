@@ -26,15 +26,24 @@ public class Allocation implements Entity<Long, Allocation>, Comparable<Allocati
     private IntegerProperty extraBedsN = new SimpleIntegerProperty();
     private ObjectProperty<ApartStatus> allocType = new SimpleObjectProperty<>();
 
+    private ObservableCollection<AllocClient> allocClientCollection = AllocClientCollection.createInstance();
+
+    public ObservableCollection<AllocClient> getAllocClientCollection() {
+        return allocClientCollection;
+    }
+
+    public ObservableList<AllocClient> getAllocClients() {
+        return allocClientCollection.getViewList();
+    }
+
     @Override
     public String toString() {
         return room.get().getRoomNumber();
     }
 
-    private ObservableList<AllocClient> clients = FXCollections.observableArrayList();
-
     public Allocation() {
     }
+
     public Allocation(Allocation elem) {
         this();
         assign(elem);
@@ -51,7 +60,7 @@ public class Allocation implements Entity<Long, Allocation>, Comparable<Allocati
         setMasterBedsN(elem.getMasterBedsN());
         setExtraBedsN(elem.getExtraBedsN());
         setAllocType(elem.getAllocType());
-        setClients(elem.getClients());
+
     }
 
     @Override
@@ -203,13 +212,5 @@ public class Allocation implements Entity<Long, Allocation>, Comparable<Allocati
 
     public void setAllocType(ApartStatus allocType) {
         this.allocType.set(allocType);
-    }
-
-    public ObservableList<AllocClient> getClients() {
-        return clients;
-    }
-
-    public void setClients(ObservableList<AllocClient> clients) {
-        this.clients = clients;
     }
 }

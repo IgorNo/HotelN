@@ -50,7 +50,7 @@ public abstract class ObserCollecAbstract<V> implements ObservableCollection<V>{
     }
 
     public ObservableList<V> getViewList() {
-        return FXCollections.unmodifiableObservableList(viewList);
+        return viewList;
     }
 
     @Override

@@ -61,7 +61,7 @@ abstract public class ObserCollecReposAbstract<K, V extends Entity<K,V>> impleme
     }
 
     public ObservableList<V> getViewList() {
-        return FXCollections.unmodifiableObservableList(viewList);
+        return viewList;
     }
 
 //    public Map<K, V> getRepository() {
