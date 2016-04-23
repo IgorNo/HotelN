@@ -66,6 +66,9 @@
                   <MenuItem fx:id="menuAppartmentStatus1" mnemonicParsing="false" onAction="#editBlocks" text="%menu.item.blocks" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="menuServices" mnemonicParsing="false" onAction="#editServices" text="%menu.item.services" />
+                  <MenuItem fx:id="menuServiceTypes" mnemonicParsing="false" onAction="#editServiceTypes" text="%menu.item.service.types" />
+                  <MenuItem fx:id="menuServiceUnits" mnemonicParsing="false" onAction="#editServiceUnits" text="%menu.item.service.units" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="menuAppartmentStatus" mnemonicParsing="false" onAction="#editAppartmentStatus" text="%menu.item.apartment.status" />
               </items>
             </Menu>

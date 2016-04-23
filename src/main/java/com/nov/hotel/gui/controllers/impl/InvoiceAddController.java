@@ -38,17 +38,21 @@ import java.util.ResourceBundle;
 public class InvoiceAddController extends AbstractController implements Initializable {
 
     private static final String ROOM_NOT_SELECTED = "????";
+    private static final ServiceUnit BED_DAY = new ServiceUnit();
+    private static final ServiceUnit BED_HOUR = new ServiceUnit();
+
+
     private Invoice invoice = new Invoice();
     private ResourceBundle rBundle;
     private ValidationSupport validationSupport = new ValidationSupport();
 
     private AbstractWindow clientWindow = ClientsWindow.getInstance();
 
-//    private ObservableCollection<Allocation> allocations = AllocationCollection.getInstance();
     private ObservableCollection<Block> blocks = BlockCollection.getInstance().readAllData();
     private ObservableCollection<ApartType> types = ApartTypeCollection.getInstance().readAllData();
     private ObservableCollection<Price> prices = PriceCollection.getInstance().readAllData();
 
+    private ObservableList<ServiceInvoice> check = FXCollections.observableArrayList();
     private ObservableList<Apartment> selectedRooms = FXCollections.observableArrayList();
 
     public TextField txtInvoiceNumber;
@@ -125,6 +129,8 @@ public class InvoiceAddController extends AbstractController implements Initiali
     public void initialize(URL location, ResourceBundle resources) {
         this.rBundle = resources;
         validationSupport.setValidationDecorator(new StyleClassValidationDecoration());
+        BED_DAY.setName(rBundle.getString("unit.bed.day"));
+        BED_HOUR.setName(rBundle.getString("unit.bed.hour"));
         fillField();
         initListeners();
         fillFieldAccomodation();
@@ -369,6 +375,8 @@ public class InvoiceAddController extends AbstractController implements Initiali
         Allocation allocation = (Allocation) listvRoom.getSelectionModel().getSelectedItem();
         allocation.setRoom((Apartment) comboSelectedRoom.getSelectionModel().getSelectedItem());
         listvRoom.setItems(invoice.getAllocations());
+        Service serviceDay = new Service();
+
     }
 
     public void actionSave(ActionEvent actionEvent) {
@@ -494,5 +502,13 @@ public class InvoiceAddController extends AbstractController implements Initiali
             Allocation currAllocation = (Allocation) listvRoom.getSelectionModel().getSelectedItem();
             currAllocation.getAllocClients().add(new AllocClient(currAllocation.getId(), client));
         }
+    }
+
+    public void addService(ActionEvent actionEvent) {
+
+    }
+
+    public void delService(ActionEvent actionEvent) {
+
     }
 }

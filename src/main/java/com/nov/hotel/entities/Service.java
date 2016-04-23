@@ -21,6 +21,12 @@ public class Service implements Entity<Integer, Service>, Comparable<Service>{
 
     public Service() {
     }
+
+    public Service(ServiceType serviceType, ServiceUnit serviceUnit) {
+        setServiceType(serviceType);
+        setServiceUnit(serviceUnit);
+    }
+
     public Service(Service elem) {
         this();
         assign(elem);

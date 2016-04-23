@@ -19,6 +19,8 @@ public class MainController extends AbstractController {
     private AbstractWindow blocksWindow;
     private AbstractWindow clientWindow;
 //    private AbstractEditDialogController invoiceEC;
+    private AbstractWindow serviceTypesWindow;
+    private AbstractWindow serviceUnitsWindow;
     
 
     public void hotelSettling(ActionEvent actionEvent) {
@@ -44,6 +46,7 @@ public class MainController extends AbstractController {
     public void editServices(ActionEvent actionEvent) {
         servicesWindow = ServicesWindow.getInstance();
         servicesWindow.initOwner(MainWindow.getInstance().getStage());
+        ServiceCollection.getInstance().readAllData();
         servicesWindow.showAndWait();
     }
 
@@ -72,4 +75,17 @@ public class MainController extends AbstractController {
         System.exit(0);
     }
 
+    public void editServiceTypes(ActionEvent actionEvent) {
+        serviceTypesWindow = ServiceTypeWindow.getInstance();
+        serviceTypesWindow.initOwner(MainWindow.getInstance().getStage());
+        ServiceTypeCollection.getInstance().readAllData();
+        serviceTypesWindow.showAndWait();
+    }
+
+    public void editServiceUnits(ActionEvent actionEvent) {
+        serviceUnitsWindow = ServiceUnitWindow.getInstance();
+        serviceUnitsWindow.initOwner(MainWindow.getInstance().getStage());
+        ServiceUnitCollection.getInstance().readAllData();
+        serviceUnitsWindow.showAndWait();
+    }
 }

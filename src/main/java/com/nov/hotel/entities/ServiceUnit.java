@@ -18,6 +18,11 @@ public class ServiceUnit implements Entity<Integer, ServiceUnit>, Comparable<Ser
 
     public ServiceUnit() {
     }
+
+    public ServiceUnit(StringProperty name) {
+        this.name = name;
+    }
+
     public ServiceUnit(ServiceUnit elem) {
         this();
         assign(elem);
@@ -31,7 +36,7 @@ public class ServiceUnit implements Entity<Integer, ServiceUnit>, Comparable<Ser
 
     @Override
     public boolean validate() {
-        return true;
+        return getName() != null && !getName().isEmpty();
     }
 
     @Override
